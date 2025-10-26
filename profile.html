@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiographyX - Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            background: #2c364a;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(44, 54, 74, 0.95);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #00b4ff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #00b4ff;
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .profile-container {
+            padding: 120px 50px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #00b4ff;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 180, 255, 0.3);
+        }
+
+        .profile-header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: #00b4ff;
+        }
+
+        .profile-header p {
+            font-size: 18px;
+            color: #d4d4d4;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .profile-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #00b4ff;
+            border-bottom: 2px solid #00b4ff;
+            padding-bottom: 10px;
+        }
+
+        .profile-section p {
+            line-height: 1.8;
+            color: #d4d4d4;
+            margin-bottom: 15px;
+        }
+
+        .profile-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .profile-section ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #d4d4d4;
+        }
+
+        .profile-section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .profile-section ul li i {
+            color: #00b4ff;
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .photo-gallery {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .photo-card {
+            position: relative;
+            border-radius: 16px;
+            background: linear-gradient(#1e2533, #1e2533) padding-box,
+                        linear-gradient(135deg, #00b4ff, #7f5af0, #00ffd1) border-box;
+            border: 2px solid transparent;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+            transition: transform .35s ease, box-shadow .35s ease;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            display: block;
+            border-radius: 14px;
+        }
+
+        .photo-card .caption {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 10px 14px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.55));
+            color: #fff;
+            font-size: 14px;
+            letter-spacing: .3px;
+        }
+
+        /* Sidebar Menu */
+        .sidebar {
+            position: fixed;
+            right: -350px;
+            top: 0;
+            width: 350px;
+            height: 100vh;
+            background: #00b4ff;
+            z-index: 2000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fff;
+        }
+
+        .sidebar-menu {
+            margin-top: 80px;
+        }
+
+        .sidebar-menu ul {
+            list-style: none;
+        }
+
+        .sidebar-menu ul li {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: padding-left 0.3s;
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-menu ul li a:hover {
+            padding-left: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 30px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .copyright a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 20px 30px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .profile-container {
+                padding: 100px 30px 40px;
+            }
+
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header h1 {
+                font-size: 32px;
+            }
+
+            .sidebar {
+                width: 280px;
+                right: -280px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Biography<span>X</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="index.html#hobby">My Hobby</a></li>
+            <li><a href="index.html#pictures">My Photo</a></li>
+        </ul>
+        <div class="menu-icon" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="johnweak.jpg" alt="John Paul Dacullo" class="profile-image">
+            <h1>John Paul Dacullo</h1>
+            <p>Determined and Passionate Individual</p>
+        </div>
+
+        <div class="profile-content">
+            <div class="profile-section">
+                <h2>About Me</h2>
+                <p>John Paul Dacullo is a determined and passionate individual who values learning, hard work, and perseverance.</p>
+                <p>He strives for growth and inspires others through his dedication and positive outlook on life.</p>
+                <p>With a strong commitment to excellence, John Paul continues to pursue his goals with unwavering determination.</p>
+            </div>
+
+            <div class="profile-section">
+                <h2>Personal Info</h2>
+                <ul>
+                    <li><i class="fas fa-user"></i> <strong>Name:</strong> John Paul Dacullo</li>
+                    <li><i class="fas fa-heart"></i> <strong>Interests:</strong> Gaming, Singing, Drawing</li>
+                    <li><i class="fas fa-book"></i> <strong>Learning:</strong> Technology & Personal Growth</li>
+                    <li><i class="fas fa-star"></i> <strong>Values:</strong> Hard Work & Perseverance</li>
+                </ul>
+            </div>
+
+            <div class="profile-section">
+                <h2>Hobbies & Interests</h2>
+                <p><i class="fas fa-gamepad"></i> <strong>Gaming:</strong> Enjoys playing video games in free time</p>
+                <p><i class="fas fa-microphone"></i> <strong>Singing:</strong> Loves to express through music and karaoke</p>
+                <p><i class="fas fa-paint-brush"></i> <strong>Drawing:</strong> Creative expression through art</p>
+            </div>
+
+            <div class="profile-section">
+                <h2>Life Philosophy</h2>
+                <p>John Paul believes in continuous learning and self-improvement. He approaches every challenge with determination and views obstacles as opportunities for growth.</p>
+                <p>His positive outlook and dedication inspire those around him to pursue their own goals with similar passion.</p>
+            </div>
+
+            <div class="photo-gallery">
+                <h2>Photo Gallery</h2>
+                <div class="gallery">
+                    <figure class="photo-card">
+                        <img src="johnweak.jpg" alt="Profile">
+                        <figcaption class="caption">Profile Picture</figcaption>
+                    </figure>
+                    <figure class="photo-card">
+                        <img src="john2.jpg" alt="Portrait">
+                        <figcaption class="caption">Portrait</figcaption>
+                    </figure>
+                    <figure class="photo-card">
+                        <img src="white.jpg" alt="Casual">
+                        <figcaption class="caption">A Moment I Love</figcaption>
+                    </figure>
+                    <figure class="photo-card">
+                        <img src="playing.jpg" alt="Gaming">
+                        <figcaption class="caption">Playing Games</figcaption>
+                    </figure>
+                    <figure class="photo-card">
+                        <img src="karaoke.jpg" alt="Singing">
+                        <figcaption class="caption">Singing Karaoke</figcaption>
+                    </figure>
+                    <figure class="photo-card">
+                        <img src="drawing.jpg" alt="Art">
+                        <figcaption class="caption">Drawing Art</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-close" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <div class="sidebar-menu">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="profile.html">PROFILE</a></li>
+                <li><a href="index.html#hobby">HOBBY</a></li>
+                <li><a href="index.html#pictures">PICTURES</a></li>
+            </ul>
+        </div>
+
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+            <a href="#"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#"><i class="fab fa-dribbble"></i></a>
+            <a href="#"><i class="fab fa-behance"></i></a>
+        </div>
+
+        <div class="copyright">
+            © SD All Rights Reserved. <a href="#">BiographyX</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuIcon = document.querySelector('.menu-icon');
+            
+            if (!sidebar.contains(event.target) && !menuIcon.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
