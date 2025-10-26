@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BiographyX</title>
+  <meta name="description" content="BiographyX - A personal biography and dashboard." />
+  <meta name="theme-color" content="#111827" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./">Biography<span class="accent">X</span></a>
+      <nav class="nav" aria-label="Primary">
+        <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+        <ul id="navMenu" class="nav-list">
+          <li><a href="./">Home</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="#hobbies">Hobbies</a></li>
+          <li><a href="#pictures">Pictures</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <h1 class="hero-title">
+          Hi! My Name is <span class="nowrap">Vence Arrone Ompad</span><br />
+          Care to hear my story?
+        </h1>
+        <p class="hero-subtitle">
+          Vence Arrone Ompad is a determined and passionate individual who values learning, hard work, and perseverance. He strives for growth and inspires others through his dedication and positive outlook on life.
+        </p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#hobbies">Explore hobbies</a>
+          <a class="btn" href="dashboard.html">Open dashboard</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hobbies -->
+    <section id="hobbies" class="section">
+      <div class="container">
+        <h2 class="section-title">My Hobby</h2>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop');" role="img" aria-label="Playing video games"></div>
+            <div class="card-body"><h3 class="card-title">Playing video games</h3></div>
+          </article>
+          <article class="card">
+            <div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1600&auto=format&fit=crop');" role="img" aria-label="Singing karaoke"></div>
+            <div class="card-body"><h3 class="card-title">Singing / Karaoke</h3></div>
+          </article>
+          <article class="card">
+            <div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1600&auto=format&fit=crop');" role="img" aria-label="Drawing on a tablet"></div>
+            <div class="card-body"><h3 class="card-title">Drawing</h3></div>
+          </article>
+          <article class="card">
+            <div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1600&auto=format&fit=crop');" role="img" aria-label="Watching movies"></div>
+            <div class="card-body"><h3 class="card-title">Watching movies</h3></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pictures -->
+    <section id="pictures" class="section">
+      <div class="container">
+        <h2 class="section-title">My Pictures</h2>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop');" role="img" aria-label="A moment I love"></div>
+            <div class="card-body"><h3 class="card-title">A moment I love</h3></div>
+          </article>
+          <article class="card">
+            <div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=1600&auto=format&fit=crop');" role="img" aria-label="City lights at night"></div>
+            <div class="card-body"><h3 class="card-title">City lights</h3></div>
+          </article>
+          <article class="card">
+            <div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1520975922284-9ec9f3eac4c7?q=80&w=1600&auto=format&fit=crop');" role="img" aria-label="Nature and mountains"></div>
+            <div class="card-body"><h3 class="card-title">Nature</h3></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">About this site</h2>
+        <p class="muted">This website has a modern, responsive dark theme. Edit the text and sections in this repository to make it fully yours.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> BiographyX · Built with ❤️</p>
+    </div>
+  </footer>
+</body>
+</html>
